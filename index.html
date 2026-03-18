@@ -151,7 +151,6 @@
       line-height: 1.7;
     }
 
-    /* ── SLIDER FIX ── */
     .slider {
       position: relative;
       width: 100%;
@@ -174,7 +173,6 @@
       object-fit: cover;
       object-position: top;
     }
-    /* ──────────────── */
 
     .slider-btn {
       position: absolute;
@@ -225,6 +223,29 @@
       border-radius: 2px;
     }
 
+    /* ── LIGHTBOX ── */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+      cursor: zoom-out;
+    }
+
+    .lightbox.open { display: flex; }
+
+    .lightbox img {
+      max-width: 92vw;
+      max-height: 92vh;
+      object-fit: contain;
+      border-radius: 2px;
+      cursor: default;
+    }
+    /* ────────────── */
+
     footer {
       max-width: 980px;
       margin: 0 auto;
@@ -264,7 +285,7 @@
 <body>
 
 <header>
-  <p class="eyebrow">Portafolio — José Daniel Medrano</p>
+  <p class="eyebrow">Portafolio — José Daniel Medrano Dominguez</p>
   <h1>Ingeniería<br>de Sistemas</h1>
   <p class="sub">Universidad del Sinú &nbsp;·&nbsp; Desarrollo Web &nbsp;·&nbsp; Arquitectura en la Nube</p>
 </header>
@@ -396,6 +417,10 @@
   <span>Montería, Córdoba — Colombia</span>
 </footer>
 
+<div class="lightbox" id="lightbox">
+  <img id="lightbox-img" src="" alt=""/>
+</div>
+
 <script>
   document.querySelectorAll('[data-slider]').forEach(slider => {
     const slides = slider.querySelector('.slides');
@@ -412,6 +437,27 @@
     slider.querySelector('.prev')?.addEventListener('click', () => go(current - 1));
     slider.querySelector('.next')?.addEventListener('click', () => go(current + 1));
     dots.forEach((d, i) => d.addEventListener('click', () => go(i)));
+
+    // Lightbox al hacer click en la imagen activa
+    slides.querySelectorAll('img').forEach((img, i) => {
+      img.style.cursor = 'zoom-in';
+      img.addEventListener('click', () => {
+        if (i !== current) return;
+        document.getElementById('lightbox-img').src = img.src;
+        document.getElementById('lightbox').classList.add('open');
+      });
+    });
+  });
+
+  // Cerrar lightbox
+  document.getElementById('lightbox').addEventListener('click', function(e) {
+    if (e.target !== document.getElementById('lightbox-img')) {
+      this.classList.remove('open');
+    }
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') document.getElementById('lightbox').classList.remove('open');
   });
 </script>
 
