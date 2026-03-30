@@ -79,14 +79,12 @@
         gap: 2rem;
         list-style: none;
       }
-
       .nav-links a {
         font-size: 13px;
         color: var(--text-muted);
         text-decoration: none;
         transition: color 0.15s;
       }
-
       .nav-links a:hover {
         color: var(--text);
       }
@@ -103,7 +101,6 @@
         gap: 5px;
         transition: opacity 0.15s;
       }
-
       .nav-cta:hover {
         opacity: 0.8;
       }
@@ -165,7 +162,6 @@
         color: var(--text);
         margin-bottom: 0.55rem;
       }
-
       .hero-role {
         font-size: clamp(15px, 2vw, 19px);
         font-weight: 400;
@@ -173,7 +169,6 @@
         letter-spacing: -0.01em;
         margin-bottom: 1.4rem;
       }
-
       .hero-sub {
         font-size: 14.5px;
         color: var(--text-muted);
@@ -206,7 +201,6 @@
         align-items: center;
         gap: 6px;
       }
-
       .btn:active {
         transform: scale(0.97);
       }
@@ -231,16 +225,33 @@
       .skills-strip {
         background: var(--surface);
         border-bottom: 1px solid var(--border);
-        padding: 1.1rem 2rem 1.25rem;
+        padding: 1.25rem 2rem 1.5rem;
       }
 
       .skills-strip-inner {
         max-width: 1040px;
         margin: 0 auto;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 1.5rem 2.5rem;
-        align-items: flex-start;
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 1.5rem 2rem;
+      }
+
+      /* Tablet: 3 columnas */
+      @media (max-width: 860px) {
+        .skills-strip-inner {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+
+      /* Móvil: 2 columnas */
+      @media (max-width: 540px) {
+        .skills-strip {
+          padding: 1rem 1.25rem 1.25rem;
+        }
+        .skills-strip-inner {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 1.1rem 1.25rem;
+        }
       }
 
       .skills-group {
@@ -255,40 +266,50 @@
         color: var(--text-faint);
         letter-spacing: 0.07em;
         text-transform: uppercase;
+        margin-bottom: 2px;
       }
 
       .skills-row {
         display: flex;
-        flex-wrap: wrap;
+        flex-direction: column;
         gap: 4px;
+      }
+
+      .skills-columns {
+        display: flex;
+        gap: 1rem;
+      }
+
+      .skills-columns .skills-row {
+        flex: 1;
       }
 
       .skill-pill {
         display: inline-flex;
         align-items: center;
-        gap: 4px;
+        gap: 6px;
         font-size: 11.5px;
         font-weight: 500;
         color: var(--text-muted);
         background: var(--bg);
         border: 1px solid var(--border);
-        padding: 3px 9px;
+        padding: 4px 9px;
         border-radius: 5px;
         white-space: nowrap;
         transition:
           border-color 0.15s,
           color 0.15s;
+        width: fit-content;
       }
-
       .skill-pill:hover {
         border-color: #c8c8c4;
         color: var(--text);
       }
-
       .skill-pill img {
         width: 13px;
         height: 13px;
         object-fit: contain;
+        flex-shrink: 0;
       }
 
       /* SECTION */
@@ -304,13 +325,11 @@
         align-items: baseline;
         margin-bottom: 1.5rem;
       }
-
       .section-header h2 {
         font-size: 19px;
         font-weight: 700;
         letter-spacing: -0.02em;
       }
-
       .section-header span {
         font-size: 12px;
         color: var(--text-faint);
@@ -345,7 +364,6 @@
           box-shadow 0.22s,
           transform 0.22s;
       }
-
       .card:hover {
         box-shadow: var(--shadow-lg);
         transform: translateY(-3px);
@@ -373,14 +391,12 @@
         height: 100%;
         flex-shrink: 0;
       }
-
       .carousel-slide img {
         width: 100%;
         height: 100%;
         object-fit: cover;
         display: block;
       }
-
       .carousel-slide .fallback {
         width: 100%;
         height: 100%;
@@ -415,7 +431,6 @@
         font-family: inherit;
         opacity: 0;
       }
-
       .carousel:hover .carousel-btn {
         opacity: 1;
       }
@@ -453,7 +468,6 @@
         border: none;
         padding: 0;
       }
-
       .carousel-dot.active {
         opacity: 0.65;
         transform: scale(1.25);
@@ -471,14 +485,12 @@
         gap: 8px;
         margin-bottom: 4px;
       }
-
       .card-title-row {
         display: flex;
         align-items: center;
         gap: 7px;
         flex-wrap: wrap;
       }
-
       .card-title {
         font-size: 14px;
         font-weight: 600;
@@ -495,7 +507,6 @@
         border-radius: 20px;
         white-space: nowrap;
       }
-
       .badge-done {
         font-size: 10px;
         font-weight: 500;
@@ -533,7 +544,6 @@
         padding: 3px 8px;
         border-radius: 5px;
       }
-
       .stack-tag img {
         width: 13px;
         height: 13px;
@@ -557,7 +567,6 @@
           box-shadow 0.15s;
         flex-shrink: 0;
       }
-
       .github-btn:hover {
         border-color: var(--text);
         color: var(--text);
@@ -581,7 +590,6 @@
         cursor: zoom-out;
         animation: lb-in 0.18s ease;
       }
-
       @keyframes lb-in {
         from {
           opacity: 0;
@@ -590,11 +598,9 @@
           opacity: 1;
         }
       }
-
       #lightbox.open {
         display: flex;
       }
-
       #lightbox img {
         max-width: 92vw;
         max-height: 88vh;
@@ -603,7 +609,6 @@
         box-shadow: 0 24px 64px rgba(0, 0, 0, 0.55);
         cursor: default;
       }
-
       #lightbox-close {
         position: fixed;
         top: 20px;
@@ -622,7 +627,6 @@
         font-family: inherit;
         transition: background 0.15s;
       }
-
       #lightbox-close:hover {
         background: rgba(255, 255, 255, 0.22);
       }
@@ -638,7 +642,6 @@
         flex-wrap: wrap;
         gap: 1rem;
       }
-
       footer p {
         font-size: 12px;
         color: var(--text-faint);
@@ -677,8 +680,8 @@
         .nav-links {
           gap: 1.1rem;
         }
-        .skills-strip-inner {
-          gap: 1.2rem 2rem;
+        .section {
+          padding: 2.5rem 1rem 3rem;
         }
       }
     </style>
@@ -686,7 +689,9 @@
   <body>
     <!-- NAV -->
     <nav>
-      <a href="#" class="nav-logo">JayDenMD24</a>
+      <a href="#" class="nav-logo">
+        <img src="img/logo.png" alt="JayDenMD24" height="60" />
+      </a>
       <ul class="nav-links">
         <li><a href="#proyectos">Proyectos</a></li>
         <li><a href="mailto:josedaniel231919@outlook.com">Contacto</a></li>
@@ -727,223 +732,151 @@
 
     <!-- SKILLS STRIP -->
     <div class="skills-strip" id="skills">
-      <div style="max-width: 1040px; margin: 0 auto">
-        <div
-          style="
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 2rem;
-          "
-        >
-          <div>
-            <div
-              style="
-                font-size: 10px;
-                font-weight: 600;
-                color: var(--text-faint);
-                letter-spacing: 0.07em;
-                text-transform: uppercase;
-                margin-bottom: 0.75rem;
-              "
+      <div class="skills-strip-inner">
+        <div class="skills-group">
+          <span class="skills-group-label">Avanzado</span>
+          <div class="skills-row">
+            <span class="skill-pill"
+              ><img
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg"
+                alt=""
+              />Java</span
             >
-              Avanzado
-            </div>
-            <div style="display: flex; flex-direction: column; gap: 5px">
-              <span class="skill-pill"
-                ><img
-                  src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg"
-                  alt=""
-                />Java</span
-              >
-              <span class="skill-pill"
-                ><img
-                  src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg"
-                  alt=""
-                />MySQL</span
-              >
-              <span class="skill-pill"
-                ><img
-                  src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlite/sqlite-original.svg"
-                  alt=""
-                />SQLite</span
-              >
-            </div>
+            <span class="skill-pill"
+              ><img
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg"
+                alt=""
+              />MySQL</span
+            >
+            <span class="skill-pill"
+              ><img
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlite/sqlite-original.svg"
+                alt=""
+              />SQLite</span
+            >
           </div>
+        </div>
 
-          <div>
-            <div
-              style="
-                font-size: 10px;
-                font-weight: 600;
-                color: var(--text-faint);
-                letter-spacing: 0.07em;
-                text-transform: uppercase;
-                margin-bottom: 0.75rem;
-              "
+        <div class="skills-group">
+          <span class="skills-group-label">Intermedio</span>
+          <div class="skills-row">
+            <span class="skill-pill"
+              ><img
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-plain.svg"
+                alt=""
+              />SQL Server</span
             >
-              Intermedio
-            </div>
-            <div style="display: flex; flex-direction: column; gap: 5px">
-              <span class="skill-pill"
-                ><img
-                  src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-plain.svg"
-                  alt=""
-                />SQL Server</span
-              >
-              <span class="skill-pill"
-                ><img
-                  src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg"
-                  alt=""
-                />HTML</span
-              >
-              <span class="skill-pill"
-                ><img
-                  src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg"
-                  alt=""
-                />CSS</span
-              >
-            </div>
+            <span class="skill-pill"
+              ><img
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg"
+                alt=""
+              />HTML</span
+            >
+            <span class="skill-pill"
+              ><img
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg"
+                alt=""
+              />CSS</span
+            >
           </div>
+        </div>
 
-          <div>
-            <div
-              style="
-                font-size: 10px;
-                font-weight: 600;
-                color: var(--text-faint);
-                letter-spacing: 0.07em;
-                text-transform: uppercase;
-                margin-bottom: 0.75rem;
-              "
+        <div class="skills-group">
+          <span class="skills-group-label">Básico</span>
+          <div class="skills-row">
+            <span class="skill-pill"
+              ><img
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg"
+                alt=""
+              />C/C++</span
             >
-              Básico
-            </div>
-            <div style="display: flex; flex-direction: column; gap: 5px">
-              <span class="skill-pill"
-                ><img
-                  src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg"
-                  alt=""
-                />C/C++</span
-              >
-              <span class="skill-pill"
-                ><img
-                  src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg"
-                  alt=""
-                />PHP</span
-              >
-              <span class="skill-pill"
-                ><img
-                  src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
-                  alt=""
-                />Python</span
-              >
-            </div>
+            <span class="skill-pill"
+              ><img
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg"
+                alt=""
+              />PHP</span
+            >
+            <span class="skill-pill"
+              ><img
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
+                alt=""
+              />Python</span
+            >
           </div>
+        </div>
 
-          <div>
-            <div
-              style="
-                font-size: 10px;
-                font-weight: 600;
-                color: var(--text-faint);
-                letter-spacing: 0.07em;
-                text-transform: uppercase;
-                margin-bottom: 0.75rem;
-              "
+        <div class="skills-group">
+          <span class="skills-group-label">SO</span>
+          <div class="skills-row">
+            <span class="skill-pill"
+              ><img
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg"
+                alt=""
+              />Linux</span
             >
-              SO
-            </div>
-            <div style="display: flex; flex-direction: column; gap: 5px">
-              <span class="skill-pill"
-                ><img
-                  src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg"
-                  alt=""
-                />Linux</span
-              >
-              <span class="skill-pill"
-                ><img
-                  src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ubuntu/ubuntu-plain.svg"
-                  alt=""
-                />Ubuntu</span
-              >
-              <span class="skill-pill"
-                ><img
-                  src="https://www.kali.org/images/kali-logo.svg"
-                  alt=""
-                />Kali</span
-              >
-              <span class="skill-pill"
-                ><img
-                  src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/windows8/windows8-original.svg"
-                  alt=""
-                />Windows</span
-              >
-            </div>
+            <span class="skill-pill"
+              ><img
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ubuntu/ubuntu-plain.svg"
+                alt=""
+              />Ubuntu</span
+            >
+            <span class="skill-pill"
+              ><img
+                src="https://www.kali.org/images/kali-logo.svg"
+                alt=""
+              />Kali</span
+            >
+            <span class="skill-pill"
+              ><img
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/windows8/windows8-original.svg"
+                alt=""
+              />Windows</span
+            >
           </div>
-
-          <div>
-            <div
-              style="
-                font-size: 10px;
-                font-weight: 600;
-                color: var(--text-faint);
-                letter-spacing: 0.07em;
-                text-transform: uppercase;
-                margin-bottom: 0.75rem;
-              "
+        </div>
+        <div class="skills-group">
+          <span class="skills-group-label">Herramientas</span>
+          <div class="skills-row">
+            <span class="skill-pill"
+              ><img
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg"
+                alt=""
+              />VS Code</span
+            ><span class="skill-pill"
+              ><img
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg"
+                alt=""
+              />Git</span
+            ><span class="skill-pill"
+              ><img
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"
+                alt=""
+              />GitHub</span
+            ><span class="skill-pill"
+              ><img
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg"
+                alt=""
+              />Arduino</span
+            ><span class="skill-pill"
+              ><img
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg"
+                alt=""
+              />Firebase</span
+            ><span class="skill-pill"
+              ><img src="img/esp32.png" alt="" />ESP32</span
+            ><span class="skill-pill"
+              ><img src="img/androidstudio.png" alt="" />Android Studio</span
+            ><span class="skill-pill"
+              ><img src="img/capacitor.png" alt="" />Capacitor</span
+            ><span class="skill-pill"
+              ><img src="img/excel.png" alt="" />Excel</span
+            ><span class="skill-pill"
+              ><img src="img/word.png" alt="" />Word</span
+            ><span class="skill-pill"
+              ><img src="img/powerpoint.png" alt="" />PowerPoint</span
+            ><span class="skill-pill"
+              ><img src="img/tailscale.png" alt="" />Tailscale</span
             >
-              Herramientas
-            </div>
-            <div style="display: flex; flex-direction: column; gap: 5px">
-              <span class="skill-pill"
-                ><img src="img/tailscale.png" alt="" />Tailscale</span
-              >
-              <span class="skill-pill"
-                ><img
-                  src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg"
-                  alt=""
-                />Arduino</span
-              >
-              <span class="skill-pill"
-                ><img
-                  src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg"
-                  alt=""
-                />VS Code</span
-              >
-              <span class="skill-pill"
-                ><img
-                  src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg"
-                  alt=""
-                />Git</span
-              >
-              <span class="skill-pill"
-                ><img
-                  src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"
-                  alt=""
-                />GitHub</span
-              >
-              <span class="skill-pill"
-                ><img
-                  src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg"
-                  alt=""
-                />Firebase</span
-              >
-              <span class="skill-pill">
-                <img src="img/esp32.png" alt="" />ESP32</span
-              >
-              <span class="skill-pill"
-                ><img
-                  src="img/capacitor.png"
-                  alt=""
-                />Capacitor</span
-              >
-              <span class="skill-pill"
-                ><img
-                  src="img/androidstudio.png"
-                  alt=""
-                />Android Studio</span
-              >
-            </div>
           </div>
         </div>
       </div>
@@ -980,7 +913,6 @@
       const GH_SVG = `<svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577v-2.165c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.84 1.237 1.84 1.237 1.07 1.834 2.807 1.304 3.492.997.108-.775.418-1.305.762-1.605-2.665-.3-5.467-1.332-5.467-5.93 0-1.31.468-2.38 1.235-3.22-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.3 1.23a11.5 11.5 0 0 1 3-.404c1.02.005 2.047.138 3 .404 2.29-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.91 1.235 3.22 0 4.61-2.807 5.625-5.479 5.92.43.372.823 1.102.823 2.222v3.293c0 .322.218.694.825.576C20.565 21.796 24 17.298 24 12c0-6.63-5.37-12-12-12z"/></svg>`;
 
       const projects = [
-        // EN PROGRESO primero
         {
           id: "house",
           title: "HouseCrab",
@@ -996,7 +928,6 @@
           ],
           imgs: ["house1.png", "house2.png", "house3.png"],
         },
-        // TERMINADOS — Archie y Home Server arriba
         {
           id: "archie",
           title: "Archie",
@@ -1006,22 +937,22 @@
           stack: [
             { name: "Python", icon: `${CDN}/python/python-original.svg` },
             { name: "SQLite", icon: `${CDN}/sqlite/sqlite-original.svg` },
-            { name: "Discord API", icon: `img/discord2.png` },
-            { name: "Steam API", icon: `img/steam.png` },
+            { name: "Discord API", icon: "img/discord2.png" },
+            { name: "Steam API", icon: "img/steam.png" },
           ],
           imgs: ["archie1.png", "archie2.png"],
         },
-                {
+        {
           id: "mono",
           title: "Mono",
           wip: false,
           repo: "https://github.com/JayDenMD24/Mono",
-          desc: "Aplicación para el registro de sesiones de monitorías académicas en la Universidad del Sinú.",
+          desc: "Aplicación para el registro de sesiones de monitorias académicas en la Universidad del Sinú.",
           stack: [
             { name: "HTML", icon: `${CDN}/html5/html5-original.svg` },
             { name: "CSS", icon: `${CDN}/css3/css3-original.svg` },
-            { name: "Android Studio", icon: `img/androidstudio.png` },
-            { name: "Capacitor", icon: `img/capacitor.png` },
+            { name: "Android Studio", icon: "img/androidstudio.png" },
+            { name: "Capacitor", icon: "img/capacitor.png" },
           ],
           imgs: ["mono1.png", "mono2.png", "mono3.png", "mono4.png"],
         },
@@ -1034,7 +965,7 @@
           stack: [
             { name: "Linux", icon: `${CDN}/linux/linux-original.svg` },
             { name: "Ubuntu", icon: `${CDN}/ubuntu/ubuntu-plain.svg` },
-            { name: "Tailscale", icon: `img/tailscale.png` },
+            { name: "Tailscale", icon: "img/tailscale.png" },
           ],
           imgs: ["srv1.jpg", "srv2.png"],
         },
@@ -1075,7 +1006,7 @@
           desc: "Sistema embebido de monitoreo que detecta incendios y envía alertas en tiempo real.",
           stack: [
             { name: "Arduino", icon: `${CDN}/arduino/arduino-original.svg` },
-            { name: "ESP32", icon: `img/esp32.png` },
+            { name: "ESP32", icon: "img/esp32.png" },
             { name: "Firebase", icon: `${CDN}/firebase/firebase-plain.svg` },
           ],
           imgs: ["fire1.jpg", "fire2.jpg", "fire3.jpg"],
@@ -1094,11 +1025,11 @@
         const slides = p.imgs
           .map(
             (img) => `
-        <div class="carousel-slide">
-          <img src="img/${img}" alt="${p.title}" loading="lazy"
-            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="fallback">${img}</div>
-        </div>`,
+          <div class="carousel-slide">
+            <img src="img/${img}" alt="${p.title}" loading="lazy"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="fallback">${img}</div>
+          </div>`,
           )
           .join("");
 
@@ -1125,23 +1056,23 @@
           : '<span class="badge-done">Terminado</span>';
 
         card.innerHTML = `
-        <div class="carousel" id="carousel-${p.id}" data-id="${p.id}">
-          <div class="carousel-track" id="track-${p.id}">${slides}</div>
-          <button class="carousel-btn prev" data-id="${p.id}" data-dir="-1" aria-label="Anterior">&#8249;</button>
-          <button class="carousel-btn next" data-id="${p.id}" data-dir="1" aria-label="Siguiente">&#8250;</button>
-          <div class="carousel-dots" id="dots-${p.id}">${dots}</div>
-        </div>
-        <div class="card-body">
-          <div class="card-top">
-            <div class="card-title-row">
-              <span class="card-title">${p.title}</span>
-              ${badge}
-            </div>
-            ${ghBtn}
+          <div class="carousel" id="carousel-${p.id}" data-id="${p.id}">
+            <div class="carousel-track" id="track-${p.id}">${slides}</div>
+            <button class="carousel-btn prev" data-id="${p.id}" data-dir="-1" aria-label="Anterior">&#8249;</button>
+            <button class="carousel-btn next" data-id="${p.id}" data-dir="1" aria-label="Siguiente">&#8250;</button>
+            <div class="carousel-dots" id="dots-${p.id}">${dots}</div>
           </div>
-          <p class="card-desc">${p.desc}</p>
-          <div class="card-stack">${stackHtml}</div>
-        </div>`;
+          <div class="card-body">
+            <div class="card-top">
+              <div class="card-title-row">
+                <span class="card-title">${p.title}</span>
+                ${badge}
+              </div>
+              ${ghBtn}
+            </div>
+            <p class="card-desc">${p.desc}</p>
+            <div class="card-stack">${stackHtml}</div>
+          </div>`;
 
         return card;
       }
@@ -1189,7 +1120,6 @@
         }
       });
 
-      // Pause auto-scroll on hover
       grid.addEventListener(
         "mouseenter",
         (e) => {
