@@ -84,9 +84,18 @@
       .hero {
         background: var(--surface);
         border-bottom: 1px solid var(--border);
-        text-align: center;
-        padding: 5.5rem 1.5rem 4.5rem;
+        padding: 4rem 2rem;
       }
+      .hero-inner {
+        max-width: 1040px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 3rem;
+      }
+      .hero-left { flex: 1; min-width: 0; }
+      .hero-right { flex-shrink: 0; }
 
       .hero-badge {
         display: inline-flex;
@@ -98,7 +107,7 @@
         border: 1px solid #bbf7d0;
         padding: 5px 14px;
         border-radius: 20px;
-        margin-bottom: 2rem;
+        margin-bottom: 1.5rem;
         font-weight: 500;
       }
 
@@ -133,8 +142,8 @@
         font-size: 14.5px;
         color: var(--text-muted);
         line-height: 1.7;
-        max-width: 440px;
-        margin: 0 auto 2.5rem;
+        max-width: 480px;
+        margin: 0 0 2.5rem;
       }
 
       .btn-dark {
@@ -150,38 +159,63 @@
         text-decoration: none;
         display: inline-flex;
         align-items: center;
+        gap: 6px;
         transition: opacity 0.15s, transform 0.1s;
       }
       .btn-dark:hover { opacity: 0.82; }
       .btn-dark:active { transform: scale(0.97); }
 
+      .hero-photo {
+        width: 380px;
+        height: 380px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+
       /* SKILLS */
       .skills-strip {
         background: var(--surface);
         border-bottom: 1px solid var(--border);
-        padding: 1.25rem 2rem 1.5rem;
+        padding: 1rem 0;
+        overflow: hidden;
+        user-select: none;
+        cursor: grab;
       }
 
-      .skills-strip-inner {
-        max-width: 1040px;
-        margin: 0 auto;
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        gap: 1.5rem 2rem;
+      .skills-marquee {
+        display: flex;
+        width: max-content;
+        will-change: transform;
+      }
+      .skills-marquee:hover .skills-track { animation-play-state: paused; }
+
+      /* Each copy of the track */
+      .skills-track {
+        display: flex;
+        align-items: center;
+        gap: 0;
+        flex-shrink: 0;
       }
 
-      .skills-group { display: flex; flex-direction: column; gap: 6px; }
+      .skills-marquee-group {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 0 10px;
+        white-space: nowrap;
+      }
 
-      .skills-group-label {
-        font-size: 10px;
-        font-weight: 600;
+      .skills-sep {
+        display: inline-flex;
+        align-items: center;
         color: var(--text-faint);
-        letter-spacing: 0.07em;
-        text-transform: uppercase;
-        margin-bottom: 2px;
+        font-size: 14px;
+        font-weight: 300;
+        opacity: 0.5;
+        user-select: none;
+        padding: 0 2px;
+        flex-shrink: 0;
       }
-
-      .skills-row { display: flex; flex-direction: column; gap: 4px; }
 
       .skill-pill {
         display: inline-flex;
@@ -196,7 +230,7 @@
         border-radius: 5px;
         white-space: nowrap;
         transition: border-color 0.15s, color 0.15s;
-        width: fit-content;
+        flex-shrink: 0;
       }
       .skill-pill:hover { border-color: #c8c8c4; color: var(--text); }
       .skill-pill img { width: 13px; height: 13px; object-fit: contain; flex-shrink: 0; }
@@ -216,6 +250,18 @@
       }
       .section-header h2 { font-size: 19px; font-weight: 700; letter-spacing: -0.02em; }
       .section-header span { font-size: 12px; color: var(--text-faint); }
+
+      .category-header {
+        grid-column: 1 / -1;
+        font-size: 15px;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+        color: var(--text-muted);
+        margin: 8px 0 4px;
+        padding-bottom: 4px;
+        border-bottom: 1px solid var(--border);
+      }
+      .category-header:first-of-type { margin-top: 0; }
 
       /* GRID */
       .projects-grid {
@@ -431,24 +477,22 @@
         border-top: 1px solid var(--border);
         background: var(--surface);
         padding: 1.5rem 2.5rem;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 1rem;
+        text-align: center;
       }
       footer p { font-size: 12px; color: var(--text-faint); }
-      .footer-links { display: flex; gap: 1.25rem; }
-      .footer-links a { font-size: 12px; color: var(--text-muted); text-decoration: none; transition: color 0.15s; }
-      .footer-links a:hover { color: var(--text); }
 
       /* FADE IN */
       .fade-in { opacity: 0; transform: translateY(14px); transition: opacity 0.48s ease, transform 0.48s ease; }
       .fade-in.visible { opacity: 1; transform: translateY(0); }
 
       /* RESPONSIVE */
-      @media (max-width: 860px) { .skills-strip-inner { grid-template-columns: repeat(3, 1fr); } }
-      @media (max-width: 740px) { .projects-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+      @media (max-width: 740px) {
+        .hero-inner { flex-direction: column; text-align: center; }
+        .hero-left { display: flex; flex-direction: column; align-items: center; }
+        .hero-sub { margin-left: auto; margin-right: auto; }
+        .hero-photo { width: 200px; height: 200px; }
+        .projects-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      }
       @media (max-width: 600px) {
         nav { padding: 0 1.25rem; }
         .nav-links { gap: 1.1rem; }
@@ -456,7 +500,6 @@
       }
       @media (max-width: 540px) {
         .skills-strip { padding: 1rem 1.25rem 1.25rem; }
-        .skills-strip-inner { grid-template-columns: repeat(2, 1fr); gap: 1.1rem 1.25rem; }
       }
       @media (max-width: 480px) { .projects-grid { grid-template-columns: 1fr; } }
     </style>
@@ -468,7 +511,6 @@
         <img src="icons/logo.gif" alt="JayDenMD24" height="60" />
       </a>
       <ul class="nav-links">
-        <li><a href="#proyectos">Proyectos</a></li>
         <li><a href="mailto:josedaniel231919@outlook.com">Contacto</a></li>
         <li>
           <a href="https://github.com/JayDenMD24" target="_blank" rel="noopener" class="nav-cta">
@@ -480,91 +522,63 @@
     </nav>
 
     <section class="hero">
-      <div class="hero-badge">
-        <span class="badge-dot"></span>
-        Disponible para oportunidades
+      <div class="hero-inner">
+        <div class="hero-left">
+          <div class="hero-badge">
+            <span class="badge-dot"></span>
+            Disponible para oportunidades
+          </div>
+          <h1 class="hero-name">José Daniel Medrano Dominguez</h1>
+          <p class="hero-role">Ingeniero de Sistemas</p>
+          <p class="hero-sub">Estudiante de Ingeniería de Sistemas en la Universidad del Sinú, con enfoque en desarrollo de software y experiencia práctica en proyectos web y móvil.</p>
+          <a href="#proyectos" class="btn-dark"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg> Ver proyectos</a>
+        </div>
+        <div class="hero-right">
+          <img src="img/foto.jpeg" alt="José Daniel Medrano" class="hero-photo" />
+        </div>
       </div>
-      <h1 class="hero-name">José Daniel Medrano Dominguez</h1>
-      <p class="hero-role">Ingeniero de Sistemas</p>
-      <p class="hero-sub">Estudiante de Ingeniería de Sistemas en la Universidad del Sinú, con enfoque en desarrollo web y arquitectura en la nube.</p>
-      <a href="#proyectos" class="btn-dark">Ver proyectos</a>
     </section>
 
     <div class="skills-strip" id="skills">
-      <div class="skills-strip-inner">
-
-        <div class="skills-group">
-          <span class="skills-group-label">Avanzado</span>
-          <div class="skills-row">
+      <div class="skills-marquee" id="skills-marquee">
+        <div class="skills-track" id="skills-track">
+          <div class="skills-marquee-group">
+            <span class="skill-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="">Python</span>
             <span class="skill-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="">Java</span>
-            <span class="skill-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="">MySQL</span>
-            <span class="skill-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlite/sqlite-original.svg" alt="">SQLite</span>
-          </div>
-        </div>
-
-        <div class="skills-group">
-          <span class="skills-group-label">Intermedio</span>
-          <div class="skills-row">
-            <span class="skill-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-plain.svg" alt="">SQL Server</span>
+            <span class="skill-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="">PHP</span>
             <span class="skill-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="">HTML</span>
             <span class="skill-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="">CSS</span>
           </div>
-        </div>
-
-        <div class="skills-group">
-          <span class="skills-group-label">Básico</span>
-          <div class="skills-row">
-            <span class="skill-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="">C/C++</span>
-            <span class="skill-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="">PHP</span>
-            <span class="skill-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="">Python</span>
+          <span class="skills-sep">|</span>
+          <div class="skills-marquee-group">
+            <span class="skill-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="">React Native</span>
+            <span class="skill-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="">Node.js</span>
           </div>
-        </div>
-
-        <div class="skills-group">
-          <span class="skills-group-label">SO</span>
-          <div class="skills-row">
-            <span class="skill-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" alt="">Linux</span>
-            <span class="skill-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ubuntu/ubuntu-plain.svg" alt="">Ubuntu</span>
-            <span class="skill-pill"><img src="https://www.kali.org/images/kali-logo.svg" alt="">Kali</span>
-            <span class="skill-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/windows8/windows8-original.svg" alt="">Windows</span>
+          <span class="skills-sep">|</span>
+          <div class="skills-marquee-group">
+            <span class="skill-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="">MySQL</span>
+            <span class="skill-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlite/sqlite-original.svg" alt="">SQLite</span>
           </div>
-        </div>
-
-        <div class="skills-group">
-          <span class="skills-group-label">Herramientas</span>
-          <div class="skills-row">
-            <span class="skill-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="">VS Code</span>
+          <span class="skills-sep">|</span>
+          <div class="skills-marquee-group">
             <span class="skill-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="">Git</span>
             <span class="skill-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="">GitHub</span>
-            <span class="skill-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg" alt="">Arduino</span>
-            <span class="skill-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" alt="">Firebase</span>
-            <span class="skill-pill"><img src="icons/esp32.png" alt="">ESP32</span>
-            <span class="skill-pill"><img src="icons/androidstudio.png" alt="">Android Studio</span>
-            <span class="skill-pill"><img src="icons/capacitor.png" alt="">Capacitor</span>
-            <span class="skill-pill"><img src="icons/excel.png" alt="">Excel</span>
-            <span class="skill-pill"><img src="icons/word.png" alt="">Word</span>
-            <span class="skill-pill"><img src="icons/powerpoint.png" alt="">PowerPoint</span>
-            <span class="skill-pill"><img src="icons/tailscale.png" alt="">Tailscale</span>
           </div>
+          <span class="skills-sep">|</span>
         </div>
-
       </div>
     </div>
 
     <section class="section" id="proyectos">
       <div class="section-header">
         <h2>Proyectos destacados</h2>
-        <span>7 proyectos</span>
+        <span>8 proyectos</span>
       </div>
       <div class="projects-grid" id="projects-grid"></div>
     </section>
 
     <footer>
       <p>© 2026 José Daniel Medrano Dominguez · Montería, Córdoba</p>
-      <div class="footer-links">
-        <a href="https://github.com/JayDenMD24" target="_blank" rel="noopener">GitHub</a>
-        <a href="mailto:josedaniel231919@outlook.com">Email</a>
-      </div>
     </footer>
 
     <div id="lightbox">
@@ -577,39 +591,138 @@
 
       const GH_SVG = `<svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577v-2.165c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.84 1.237 1.84 1.237 1.07 1.834 2.807 1.304 3.492.997.108-.775.418-1.305.762-1.605-2.665-.3-5.467-1.332-5.467-5.93 0-1.31.468-2.38 1.235-3.22-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.3 1.23a11.5 11.5 0 0 1 3-.404c1.02.005 2.047.138 3 .404 2.29-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.91 1.235 3.22 0 4.61-2.807 5.625-5.479 5.92.43.372.823 1.102.823 2.222v3.293c0 .322.218.694.825.576C20.565 21.796 24 17.298 24 12c0-6.63-5.37-12-12-12z"/></svg>`;
 
+      // ── Skills marquee con drag ──
+      (function () {
+        const skillsStrip = document.querySelector(".skills-strip");
+        const marquee     = document.getElementById("skills-marquee");
+        const origTrack   = document.getElementById("skills-track");
+        if (!marquee || !origTrack) return;
+
+        function fillClones() {
+          marquee.querySelectorAll("[aria-hidden='true']").forEach(n => n.remove());
+          const trackW = origTrack.offsetWidth;
+          if (!trackW) return;
+          const copies = Math.ceil((window.innerWidth * 3) / trackW) + 2;
+          const frag = document.createDocumentFragment();
+          for (let i = 0; i < copies; i++) {
+            const clone = origTrack.cloneNode(true);
+            clone.removeAttribute("id");
+            clone.setAttribute("aria-hidden", "true");
+            frag.appendChild(clone);
+          }
+          marquee.appendChild(frag);
+        }
+
+        fillClones();
+        window.addEventListener("resize", () => { pos = 0; fillClones(); });
+
+        const SPEED = 0.65;
+        let pos = 0;
+        let dragging = false;
+        let dragStartX = 0;
+        let dragStartPos = 0;
+
+        skillsStrip.addEventListener("mousedown", e => {
+          if (e.button !== 0) return;
+          dragging = true;
+          dragStartX = e.clientX;
+          dragStartPos = pos;
+          skillsStrip.style.cursor = "grabbing";
+        });
+
+        window.addEventListener("mousemove", e => {
+          if (!dragging) return;
+          const dx = e.clientX - dragStartX;
+          pos = dragStartPos + dx;
+          const trackW = origTrack.offsetWidth;
+          if (trackW) {
+            while (pos > 0) pos -= trackW;
+            while (pos <= -trackW) pos += trackW;
+          }
+          marquee.style.transform = `translateX(${pos}px)`;
+        });
+
+        window.addEventListener("mouseup", () => {
+          if (!dragging) return;
+          dragging = false;
+          skillsStrip.style.cursor = "";
+        });
+
+        function tick() {
+          if (!dragging) {
+            pos -= SPEED;
+            const trackW = origTrack.offsetWidth;
+            if (trackW && pos <= -trackW) pos += trackW;
+            marquee.style.transform = `translateX(${pos}px)`;
+          }
+          requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+      })();
+
+
+
       const projects = [
-        {
-          id: "house",
-          title: "HouseCrab",
-          wip: true,
+        // Académicos
+        { category: "academic",
+          id: "house", title: "HouseCrab", wip: true,
           repo: "https://github.com/JayDenMD24/HouseCrab",
           desc: "App para registro y búsqueda de pensiones estudiantiles en Montería, Córdoba.",
           stack: [
             { name: "React Native", icon: `${CDN}/react/react-original.svg` },
+            { name: "Node.js",      icon: `${CDN}/nodejs/nodejs-original.svg` },
             { name: "PostgreSQL",   icon: `${CDN}/postgresql/postgresql-original.svg` },
           ],
-          imgs:     ["house1.png", "house2.png", "house3.png"],
+          imgs: ["house1.png", "house2.png", "house3.png"],
           fullImgs: ["house1.png", "house2.png", "house3.png"],
         },
-        {
-          id: "archie",
-          title: "Archie",
-          wip: false,
-          repo: "https://github.com/JayDenMD24/Archie",
-          desc: "Bot de Discord que notifica automáticamente los logros de Steam de los usuarios.",
+        { category: "academic",
+          id: "fire", title: "Sistema de Detección de Incendios", wip: false, repo: null,
+          desc: "Sistema embebido de monitoreo que detecta incendios y envía alertas en tiempo real.",
           stack: [
-            { name: "Python",      icon: `${CDN}/python/python-original.svg` },
-            { name: "SQLite",      icon: `${CDN}/sqlite/sqlite-original.svg` },
-            { name: "Discord API", icon: "icons/discord.png" },
-            { name: "Steam API",   icon: "icons/steam.png" },
+            { name: "Arduino",  icon: `${CDN}/arduino/arduino-original.svg` },
+            { name: "ESP32",    icon: "icons/esp32.png" },
+            { name: "Firebase", icon: `${CDN}/firebase/firebase-plain.svg` },
           ],
-          imgs:     ["archie1.png", "archie2.png"],
-          fullImgs: ["archie1.png", "archie2.png"],
+          imgs: ["fire1.png", "fire2.png", "fire3.png"],
+          fullImgs: ["fire1.png", "fire2.png", "fire3.png"],
         },
-        {
-          id: "mono",
-          title: "Mono",
-          wip: false,
+        { category: "academic",
+          id: "bib", title: "Biblioteca B12", wip: false, repo: null,
+          desc: "App web para registro y administración de libros con operaciones CRUD.",
+          stack: [
+            { name: "HTML",       icon: `${CDN}/html5/html5-original.svg` },
+            { name: "CSS",        icon: `${CDN}/css3/css3-original.svg` },
+            { name: "PHP",        icon: `${CDN}/php/php-original.svg` },
+            { name: "SQL Server", icon: `${CDN}/microsoftsqlserver/microsoftsqlserver-plain.svg` },
+          ],
+          imgs: ["bib1.png", "bib2.png", "bib3.png", "bib4.png", "bib5.png"],
+          fullImgs: ["bib1.png", "bib2.png", "bib3.png", "bib4.png", "bib5.png"],
+        },
+        { category: "academic",
+          id: "pomo", title: "POMOFOCUS", wip: false, repo: null,
+          desc: "App de escritorio para gestión del tiempo basada en la técnica Pomodoro.",
+          stack: [
+            { name: "Java",  icon: `${CDN}/java/java-original.svg` },
+            { name: "MySQL", icon: `${CDN}/mysql/mysql-original.svg` },
+          ],
+          imgs: ["pomo1.png", "pomo2.png", "pomo3.png"],
+          fullImgs: ["pomo1.png", "pomo2.png", "pomo3.png"],
+        },
+        // Personales
+        { category: "personal",
+          id: "vi", title: "Violet", wip: false,
+          repo: "https://github.com/JayDenMD24/Violet",
+          desc: "Aplicación de escritorio que permite subir videos a Google Drive y compartirlos en Discord de forma automática.",
+          stack: [
+            { name: "Python",          icon: `${CDN}/python/python-original.svg` },
+            { name: "Google Drive API", icon: "icons/google_drive.png" },
+          ],
+          imgs: ["vi.png", "vi2.png", "vi3.png"],
+          fullImgs: ["vi.png", "vi2.png", "vi3.png"],
+        },
+        { category: "personal",
+          id: "mono", title: "Mono", wip: false,
           repo: "https://github.com/JayDenMD24/Mono",
           desc: "Aplicación para el registro de sesiones de monitorias académicas en la Universidad del Sinú.",
           stack: [
@@ -618,64 +731,32 @@
             { name: "Android Studio", icon: "icons/androidstudio.png" },
             { name: "Capacitor",      icon: "icons/capacitor.png" },
           ],
-          imgs:     ["mono1.png", "mono2.png", "mono3.png", "mono4.png"],
+          imgs: ["mono1.png", "mono2.png", "mono3.png", "mono4.png"],
           fullImgs: ["mono1.png", "mono2.png", "mono3.png", "mono4.png"],
         },
-        {
-          id: "srv",
-          title: "Home Server",
-          wip: false,
-          repo: null,
+        { category: "personal",
+          id: "archie", title: "Archie", wip: false,
+          repo: "https://github.com/JayDenMD24/Archie",
+          desc: "Bot de Discord que notifica automáticamente los logros de Steam de los usuarios.",
+          stack: [
+            { name: "Python",      icon: `${CDN}/python/python-original.svg` },
+            { name: "SQLite",      icon: `${CDN}/sqlite/sqlite-original.svg` },
+            { name: "Discord API", icon: "icons/discord.png" },
+            { name: "Steam API",   icon: "icons/steam.png" },
+          ],
+          imgs: ["archie1.png", "archie2.png"],
+          fullImgs: ["archie1.png", "archie2.png"],
+        },
+        { category: "personal",
+          id: "srv", title: "Home Server", wip: false, repo: null,
           desc: "Portátil reutilizado como servidor doméstico con acceso remoto vía Tailscale.",
           stack: [
             { name: "Linux",     icon: `${CDN}/linux/linux-original.svg` },
             { name: "Ubuntu",    icon: `${CDN}/ubuntu/ubuntu-plain.svg` },
             { name: "Tailscale", icon: "icons/tailscale.png" },
           ],
-          imgs:     ["srv1.png", "srv2.png"],
+          imgs: ["srv1.png", "srv2.png"],
           fullImgs: ["srv1.png", "srv2.png"],
-        },
-        {
-          id: "pomo",
-          title: "POMOFOCUS",
-          wip: false,
-          repo: null,
-          desc: "App de escritorio para gestión del tiempo basada en la técnica Pomodoro.",
-          stack: [
-            { name: "Java",  icon: `${CDN}/java/java-original.svg` },
-            { name: "MySQL", icon: `${CDN}/mysql/mysql-original.svg` },
-          ],
-          imgs:     ["pomo1.png", "pomo2.png", "pomo3.png"],
-          fullImgs: ["pomo1.png", "pomo2.png", "pomo3.png"],
-        },
-        {
-          id: "bib",
-          title: "Biblioteca B12",
-          wip: false,
-          repo: null,
-          desc: "App web para registro y administración de libros con operaciones CRUD.",
-          stack: [
-            { name: "HTML",       icon: `${CDN}/html5/html5-original.svg` },
-            { name: "CSS",        icon: `${CDN}/css3/css3-original.svg` },
-            { name: "PHP",        icon: `${CDN}/php/php-original.svg` },
-            { name: "SQL Server", icon: `${CDN}/microsoftsqlserver/microsoftsqlserver-plain.svg` },
-          ],
-          imgs:     ["bib1.png", "bib2.png", "bib3.png", "bib4.png", "bib5.png"],
-          fullImgs: ["bib1.png", "bib2.png", "bib3.png", "bib4.png", "bib5.png"],
-        },
-        {
-          id: "fire",
-          title: "Sistema de Detección de Incendios",
-          wip: false,
-          repo: null,
-          desc: "Sistema embebido de monitoreo que detecta incendios y envía alertas en tiempo real.",
-          stack: [
-            { name: "Arduino",  icon: `${CDN}/arduino/arduino-original.svg` },
-            { name: "ESP32",    icon: "icons/esp32.png" },
-            { name: "Firebase", icon: `${CDN}/firebase/firebase-plain.svg` },
-          ],
-          imgs:     ["fire1.png", "fire2.png", "fire3.png"],
-          fullImgs: ["fire1.png", "fire2.png", "fire3.png"],
         },
       ];
 
@@ -707,7 +788,7 @@
           : "";
 
         const badge = p.wip
-          ? '<span class="badge-wip">En progreso</span>'
+          ? '<span class="badge-wip">En curso</span>'
           : '<span class="badge-done">Terminado</span>';
 
         card.innerHTML = `
@@ -752,11 +833,20 @@
 
       function stopAuto(id) { clearInterval(timers[id]); }
 
-      projects.forEach(p => {
-        const c = buildCard(p);
-        grid.appendChild(c);
-        if (p.imgs.length > 1) startAuto(p.id);
-      });
+      function renderCategory(label, items) {
+        const header = document.createElement("div");
+        header.className = "category-header";
+        header.textContent = label;
+        grid.appendChild(header);
+        items.forEach(p => {
+          const c = buildCard(p);
+          grid.appendChild(c);
+          if (p.imgs.length > 1) startAuto(p.id);
+        });
+      }
+
+      renderCategory("Académicos", projects.filter(p => p.category === "academic"));
+      renderCategory("Personales",  projects.filter(p => p.category === "personal"));
 
       grid.addEventListener("click", e => {
         const btn = e.target.closest(".carousel-btn");
