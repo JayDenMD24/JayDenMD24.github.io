@@ -189,7 +189,6 @@
       }
       .skills-marquee:hover .skills-track { animation-play-state: paused; }
 
-      /* Each copy of the track */
       .skills-track {
         display: flex;
         align-items: center;
@@ -542,27 +541,19 @@
     <div class="skills-strip" id="skills">
       <div class="skills-marquee" id="skills-marquee">
         <div class="skills-track" id="skills-track">
+          <span class="skill-pill" style="font-weight:600;color:var(--text);background:transparent;border:none">Lenguajes</span>
           <div class="skills-marquee-group">
-            <span class="skill-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="">Python</span>
             <span class="skill-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="">Java</span>
             <span class="skill-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="">PHP</span>
             <span class="skill-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="">HTML</span>
             <span class="skill-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="">CSS</span>
+            <span class="skill-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="">Python</span>
           </div>
           <span class="skills-sep">|</span>
-          <div class="skills-marquee-group">
-            <span class="skill-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="">React Native</span>
-            <span class="skill-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="">Node.js</span>
-          </div>
-          <span class="skills-sep">|</span>
+          <span class="skill-pill" style="font-weight:600;color:var(--text);background:transparent;border:none">Bases de datos</span>
           <div class="skills-marquee-group">
             <span class="skill-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="">MySQL</span>
             <span class="skill-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlite/sqlite-original.svg" alt="">SQLite</span>
-          </div>
-          <span class="skills-sep">|</span>
-          <div class="skills-marquee-group">
-            <span class="skill-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="">Git</span>
-            <span class="skill-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="">GitHub</span>
           </div>
           <span class="skills-sep">|</span>
         </div>
@@ -572,7 +563,7 @@
     <section class="section" id="proyectos">
       <div class="section-header">
         <h2>Proyectos destacados</h2>
-        <span>8 proyectos</span>
+        <span>9 proyectos</span>
       </div>
       <div class="projects-grid" id="projects-grid"></div>
     </section>
@@ -622,6 +613,10 @@
         let dragStartX = 0;
         let dragStartPos = 0;
 
+        function getX(e) {
+          return e.touches ? e.touches[0].clientX : e.clientX;
+        }
+
         skillsStrip.addEventListener("mousedown", e => {
           if (e.button !== 0) return;
           dragging = true;
@@ -630,9 +625,28 @@
           skillsStrip.style.cursor = "grabbing";
         });
 
+        skillsStrip.addEventListener("touchstart", e => {
+          dragging = true;
+          dragStartX = getX(e);
+          dragStartPos = pos;
+        }, { passive: true });
+
         window.addEventListener("mousemove", e => {
           if (!dragging) return;
           const dx = e.clientX - dragStartX;
+          drag(dx);
+        });
+
+        window.addEventListener("touchmove", e => {
+          if (!dragging) return;
+          const dx = getX(e) - dragStartX;
+          drag(dx);
+        }, { passive: true });
+
+        window.addEventListener("mouseup", () => endDrag());
+        window.addEventListener("touchend", () => endDrag());
+
+        function drag(dx) {
           pos = dragStartPos + dx;
           const trackW = origTrack.offsetWidth;
           if (trackW) {
@@ -640,13 +654,13 @@
             while (pos <= -trackW) pos += trackW;
           }
           marquee.style.transform = `translateX(${pos}px)`;
-        });
+        }
 
-        window.addEventListener("mouseup", () => {
+        function endDrag() {
           if (!dragging) return;
           dragging = false;
           skillsStrip.style.cursor = "";
-        });
+        }
 
         function tick() {
           if (!dragging) {
@@ -675,6 +689,18 @@
           ],
           imgs: ["house1.png", "house2.png", "house3.png"],
           fullImgs: ["house1.png", "house2.png", "house3.png"],
+        },
+        { category: "academic",
+          id: "alpr", title: "ALPR Colombia", wip: false,
+          repo: "https://github.com/JayDenMD24/ALPR-Colombia",
+          desc: "Sistema de reconocimiento de placas colombianas que automatiza la consulta de registros en el SIMIT.",
+          stack: [
+            { name: "Python",     icon: `${CDN}/python/python-original.svg` },
+            { name: "Roboflow",   icon: "icons/roboflow.png" },
+            { name: "Google Colab", icon: "icons/colab.png" },
+          ],
+          imgs: ["alpr1.png", "alpr2.png"],
+          fullImgs: ["alpr1.png", "alpr2.png"],
         },
         { category: "academic",
           id: "fire", title: "Sistema de Detección de Incendios", wip: false, repo: null,
@@ -755,8 +781,8 @@
             { name: "Ubuntu",    icon: `${CDN}/ubuntu/ubuntu-plain.svg` },
             { name: "Tailscale", icon: "icons/tailscale.png" },
           ],
-          imgs: ["srv1.png", "srv2.png"],
-          fullImgs: ["srv1.png", "srv2.png"],
+          imgs: ["srv1.png", "srv2.png", "srv3.png"],
+          fullImgs: ["srv1.png", "srv2.png", "srv3.png"],
         },
       ];
 
